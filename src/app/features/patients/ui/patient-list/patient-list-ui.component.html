@@ -1,0 +1,104 @@
+<div class="patient-list-container">
+    <div class="header">
+        <h1>Patients</h1>
+        <button class="add-button" (click)="onAdd()">
+            <i class="fas fa-plus"></i> Add Patient
+        </button>
+    </div>
+
+    <div class="content">
+        <!-- Error State -->
+        <div *ngIf="error" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            {{ error }}
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="loading" class="skeleton-loader">
+            <div class="skeleton-header"></div>
+            <div class="skeleton-row" *ngFor="let i of [1,2,3,4,5]">
+                <div class="skeleton-cell" style="width: 25%"></div>
+                <div class="skeleton-cell" style="width: 15%"></div>
+                <div class="skeleton-cell" style="width: 20%"></div>
+                <div class="skeleton-cell" style="width: 15%"></div>
+                <div class="skeleton-cell" style="width: 15%"></div>
+                <div class="skeleton-cell" style="width: 10%"></div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!loading && !error && (!patients || patients.length === 0)" class="empty-state">
+            <i class="fas fa-user-injured"></i>
+            <p>No patients found in the system</p>
+            <p class="subtitle">Get started by adding your first patient record</p>
+            <button (click)="onAdd()">
+                <i class="fas fa-plus"></i>
+                Add your first patient
+            </button>
+        </div>
+
+        <!-- Patient List -->
+        <div *ngIf="!loading && !error && patients && patients.length > 0" class="patient-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date of Birth</th>
+                        <th>Contact</th>
+                        <th>Last Visit</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let patient of patients"
+                        (click)="onSelect(patient.id)"
+                        class="patient-row"
+                        [class.has-upcoming]="patient.upcomingAppointment">
+                        <td class="name-cell">
+                            <div class="patient-name">
+                                {{ getPatientFullName(patient) }}
+                                <span *ngIf="patient.upcomingAppointment" class="upcoming-badge"
+                                      [title]="'Upcoming appointment: ' + (patient.upcomingAppointment | date:'medium')">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                            </div>
+                            <div class="patient-email">
+                                <i class="fas fa-envelope"></i> {{ patient.email }}
+                            </div>
+                        </td>
+                        <td>
+                            <i class="fas fa-birthday-cake"></i>
+                            {{ patient.dateOfBirth | date:'mediumDate' }}
+                        </td>
+                        <td>
+                            <i class="fas fa-phone"></i>
+                            {{ patient.contactNumber }}
+                        </td>
+                        <td>
+                            <i class="fas fa-calendar-check"></i>
+                            {{ patient.lastVisit | date:'mediumDate' }}
+                        </td>
+                        <td>
+                            <span class="status-badge" [class]="getStatusClass(patient.status)">
+                                <i [class]="getStatusIcon(patient.status)"></i>
+                                {{ patient.status }}
+                            </span>
+                        </td>
+                        <td class="actions-cell">
+                            <button class="action-btn view-btn" (click)="onSelect(patient.id)" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit-btn" (click)="onEdit(patient.id, $event)" title="Edit Patient">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" (click)="onDelete(patient.id, $event)" title="Delete Patient">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

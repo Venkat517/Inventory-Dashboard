@@ -1,0 +1,312 @@
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.patient-list-container {
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+
+        h1 {
+            font-size: 24px;
+            color: #2f3687;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .add-button {
+            background: #2f3687;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+
+            &:hover {
+                background: #3f478e;
+                transform: translateY(-1px);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+
+            i {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .content {
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            i {
+                font-size: 18px;
+            }
+        }
+
+        .skeleton-loader {
+            .skeleton-header {
+                height: 48px;
+                background: #f3f4f6;
+                border-radius: 8px;
+                margin-bottom: 16px;
+            }
+
+            .skeleton-row {
+                display: flex;
+                gap: 16px;
+                padding: 16px;
+                border-bottom: 1px solid #e5e7eb;
+
+                .skeleton-cell {
+                    height: 20px;
+                    background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+                    background-size: 2000px 100%;
+                    animation: shimmer 2s linear infinite;
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 0;
+            color: #6b7280;
+
+            i {
+                font-size: 48px;
+                margin-bottom: 16px;
+                color: #9ca3af;
+            }
+
+            p {
+                margin-bottom: 8px;
+                font-size: 16px;
+
+                &.subtitle {
+                    color: #9ca3af;
+                    font-size: 14px;
+                    margin-bottom: 24px;
+                }
+            }
+
+            button {
+                background: #2f3687;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.2s;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin: 0 auto;
+
+                &:hover {
+                    background: #3f478e;
+                    transform: translateY(-1px);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        .patient-table {
+            overflow-x: auto;
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+
+                th {
+                    text-align: left;
+                    padding: 16px;
+                    background: #f8f9fa;
+                    color: #4b5563;
+                    font-weight: 600;
+                    font-size: 14px;
+                    border-bottom: 1px solid #e5e7eb;
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                }
+
+                td {
+                    padding: 16px;
+                    border-bottom: 1px solid #e5e7eb;
+                    color: #1f2937;
+                    font-size: 14px;
+
+                    i {
+                        color: #6b7280;
+                        margin-right: 8px;
+                        width: 16px;
+                    }
+                }
+
+                .patient-row {
+                    cursor: pointer;
+                    transition: all 0.2s;
+
+                    &:hover {
+                        background: #f9fafb;
+                        transform: translateY(-1px);
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                    }
+
+                    &.has-upcoming {
+                        background: #f0f9ff;
+
+                        &:hover {
+                            background: #e0f2fe;
+                        }
+                    }
+
+                    .name-cell {
+                        .patient-name {
+                            font-weight: 500;
+                            color: #2f3687;
+                            margin-bottom: 4px;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+
+                            .upcoming-badge {
+                                background: #dbeafe;
+                                color: #2563eb;
+                                padding: 4px 8px;
+                                border-radius: 12px;
+                                font-size: 12px;
+                                display: flex;
+                                align-items: center;
+                                gap: 4px;
+                            }
+                        }
+
+                        .patient-email {
+                            color: #6b7280;
+                            font-size: 13px;
+                            display: flex;
+                            align-items: center;
+                        }
+                    }
+
+                    .status-badge {
+                        padding: 6px 12px;
+                        border-radius: 20px;
+                        font-size: 13px;
+                        font-weight: 500;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+
+                        i {
+                            margin: 0;
+                        }
+
+                        &.status-active {
+                            background: #dcfce7;
+                            color: #15803d;
+
+                            i {
+                                color: #15803d;
+                            }
+                        }
+
+                        &.status-inactive {
+                            background: #f3f4f6;
+                            color: #4b5563;
+
+                            i {
+                                color: #4b5563;
+                            }
+                        }
+
+                        &.status-critical {
+                            background: #fee2e2;
+                            color: #dc2626;
+
+                            i {
+                                color: #dc2626;
+                            }
+                        }
+                    }
+
+                    .actions-cell {
+                        display: flex;
+                        gap: 8px;
+                        opacity: 0.7;
+                        transition: opacity 0.2s;
+
+                        .action-btn {
+                            background: none;
+                            border: none;
+                            padding: 8px;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            color: #6b7280;
+                            transition: all 0.2s;
+
+                            &:hover {
+                                background: #f3f4f6;
+                                color: #2f3687;
+                                transform: translateY(-1px);
+                            }
+
+                            &.edit-btn:hover {
+                                background: #dbeafe;
+                                color: #2563eb;
+                            }
+
+                            &.delete-btn:hover {
+                                background: #fee2e2;
+                                color: #dc2626;
+                            }
+                        }
+                    }
+
+                    &:hover .actions-cell {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

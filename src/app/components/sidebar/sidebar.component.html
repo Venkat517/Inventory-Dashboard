@@ -1,0 +1,27 @@
+<aside class="sidebar">
+    <div class="brand">
+        <img [src]="logoPath" [alt]="hospitalName + ' Logo'" />
+        <h2>{{ hospitalName }}</h2>
+    </div>
+
+    <nav class="nav">
+        <a *ngFor="let item of navigationItems"
+           [routerLink]="item.path"
+           routerLinkActive="active"
+           [class.has-badge]="item.badge">
+            <i class="icon">{{ item.icon }}</i> {{ item.label }}
+            <span class="badge" *ngIf="item.badge">{{ item.badge }}</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="user-info">
+            <div class="avatar">
+                {{ currentUser.avatar }}
+            </div>
+            <div class="user-details">
+                <span class="name">{{ currentUser.name }}</span>
+            </div>
+        </div>
+    </div>
+</aside>

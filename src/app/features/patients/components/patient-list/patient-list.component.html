@@ -1,0 +1,59 @@
+<div class="patient-list-container">
+    <div class="header">
+        <h1>Patients</h1>
+        <button class="add-button" routerLink="new">
+            <i class="fas fa-plus"></i> Add New Patient
+        </button>
+    </div>
+
+    <div *ngIf="error$ | async as error" class="error-message">
+        {{ error }}
+    </div>
+
+    <div *ngIf="loading$ | async" class="loading-spinner">
+        Loading patients...
+    </div>
+
+    <div class="patients-grid" *ngIf="patients$ | async as patients">
+        <div class="patient-card" *ngFor="let patient of patients">
+            <div class="patient-header">
+                <h3>{{ patient.name }}</h3>
+                <span [class]="'status-badge ' + getStatusClass(patient.status)">
+                    {{ patient.status }}
+                </span>
+            </div>
+            
+            <div class="patient-info">
+                <div class="info-row">
+                    <span class="label">Age:</span>
+                    <span>{{ patient.age }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Doctor:</span>
+                    <span>{{ patient.assignedDoctor }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Room:</span>
+                    <span>{{ patient.roomNumber || 'Not Assigned' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Diagnosis:</span>
+                    <span>{{ patient.diagnosis }}</span>
+                </div>
+            </div>
+
+            <div class="patient-actions">
+                <button class="action-button view" (click)="onViewDetails(patient.id)">
+                    <i class="fas fa-eye"></i> View
+                </button>
+                <button class="action-button delete" (click)="onDeletePatient(patient.id)">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="patients.length === 0" class="no-patients">
+            No patients found. Click "Add New Patient" to add one.
+        </div>
+    </div>
+</div> 
