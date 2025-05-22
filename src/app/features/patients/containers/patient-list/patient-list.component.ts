@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
-import { Patient, PatientState } from '../../models/patient.model';
+import { Patient } from '../../models/patient.model';
 import * as PatientActions from '../../store/patient.actions';
-import { selectAllPatients, selectPatientsLoading, selectPatientsError } from '../../store/patient.selectors';
+import * as PatientSelectors from '../../store/patient.selectors';
 import { PatientListUiComponent } from '../../ui/patient-list/patient-list-ui.component';
 
 @Component({
@@ -28,15 +28,19 @@ export class PatientListComponent implements OnInit {
     error$: Observable<string | null>;
 
     constructor(
-        private store: Store<{ patients: PatientState }>,
+        private store: Store,
         private router: Router
     ) {
-        this.patients$ = this.store.select(selectAllPatients);
-        this.loading$ = this.store.select(selectPatientsLoading);
-        this.error$ = this.store.select(selectPatientsError);
+        this.patients$ = this.store.select(PatientSelectors.selectAllPatients);
+        this.loading$ = this.store.select(PatientSelectors.selectPatientsLoading);
+        this.error$ = this.store.select(PatientSelectors.selectPatientsError);
     }
 
     ngOnInit(): void {
+        this.loadPatients();
+    }
+
+    loadPatients(): void {
         this.store.dispatch(PatientActions.loadPatients());
     }
 
@@ -56,6 +60,7 @@ export class PatientListComponent implements OnInit {
     }
 
     onEditPatient(id: string): void {
+        this.store.dispatch(PatientActions.selectPatient({ id }));
         this.router.navigate(['/patients', id, 'edit']);
     }
 }

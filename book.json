@@ -1,0 +1,34 @@
+{
+  "flights": [
+    {
+      "id": 1,
+      "flightNumber": "FL123",
+      "origin": "New York",
+      "destination": "London",
+      "departureTime": "2024-03-20T10:00:00",
+      "arrivalTime": "2024-03-20T22:00:00",
+      "airline": "British Airways",
+      "status": "On Time"
+    },
+    {
+      "id": 2,
+      "flightNumber": "FL456",
+      "origin": "London",
+      "destination": "Paris",
+      "departureTime": "2024-03-20T14:30:00",
+      "arrivalTime": "2024-03-20T16:30:00",
+      "airline": "Air France",
+      "status": "Delayed"
+    },
+    {
+      "id": 3,
+      "flightNumber": "FL789",
+      "origin": "Paris",
+      "destination": "Berlin",
+      "departureTime": "2024-03-20T18:00:00",
+      "arrivalTime": "2024-03-20T20:00:00",
+      "airline": "Lufthansa",
+      "status": "On Time"
+    }
+  ]
+} 

@@ -94,3 +94,5 @@ export const patientReducer = createReducer(
         selectedPatient: null
     }))
 );
+export { PatientState };
+

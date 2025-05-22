@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { PatientListComponent } from './features/patients/containers/patient-list/patient-list.component';
 import { FlightListComponent } from './features/flightlist/components/flight-list/flight-list.component';
 
 export const routes: Routes = [
@@ -10,7 +9,7 @@ export const routes: Routes = [
     },
     {
         path: 'patients',
-        component: PatientListComponent
+        loadChildren: () => import('./features/patients/patients.module').then(m => m.PatientsModule)
     },
     {
         path: 'flights',

@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { routes } from './app.routes';
-import { PatientsModule } from './features/patients/patients.module';
 import { FlightListModule } from './features/flightlist/flightlist.module';
 import { FlightListComponent } from './features/flightlist/components/flight-list/flight-list.component';
 
@@ -33,7 +32,6 @@ import { FlightListComponent } from './features/flightlist/components/flight-lis
         StoreDevtoolsModule.instrument({
             maxAge: 25
         }),
-        PatientsModule,
         FlightListModule,
         FlightListComponent
     ],
