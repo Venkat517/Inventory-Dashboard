@@ -9,7 +9,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 1000;
+    z-index: 1; /* Reduced z-index to be below main content */
     overflow-y: hidden; /* Prevent sidebar itself from scrolling */
 }
 

@@ -2,6 +2,7 @@
     0% {
         background-position: -1000px 0;
     }
+
     100% {
         background-position: 1000px 0;
     }
@@ -266,38 +267,51 @@
                     .actions-cell {
                         display: flex;
                         gap: 8px;
-                        opacity: 0.7;
-                        transition: opacity 0.2s;
+                        justify-content: flex-end;
+                        padding: 24px 16px;
 
                         .action-btn {
-                            background: none;
+                            width: 32px;
+                            height: 32px;
                             border: none;
-                            padding: 8px;
                             border-radius: 6px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                             cursor: pointer;
-                            color: #6b7280;
                             transition: all 0.2s;
+                            background: transparent;
 
-                            &:hover {
-                                background: #f3f4f6;
+                            i {
+                                font-size: 14px;
+                                margin: 0;
+                                width: auto;
+                            }
+
+                            &.view-btn {
                                 color: #2f3687;
-                                transform: translateY(-1px);
+
+                                &:hover {
+                                    background: rgba(47, 54, 135, 0.1);
+                                }
                             }
 
-                            &.edit-btn:hover {
-                                background: #dbeafe;
-                                color: #2563eb;
+                            &.edit-btn {
+                                color: #059669;
+
+                                &:hover {
+                                    background: rgba(5, 150, 105, 0.1);
+                                }
                             }
 
-                            &.delete-btn:hover {
-                                background: #fee2e2;
+                            &.delete-btn {
                                 color: #dc2626;
+
+                                &:hover {
+                                    background: rgba(220, 38, 38, 0.1);
+                                }
                             }
                         }
-                    }
-
-                    &:hover .actions-cell {
-                        opacity: 1;
                     }
                 }
             }
